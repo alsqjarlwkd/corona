@@ -79,8 +79,7 @@ const Contents=()=>{
                 label:"누적 확진,해제,사망 비율",
                 backgroundColor:["green","yellow","red"],
                 fill:false,
-                data:[last.confirmed,last.recovered,last.death],
-
+                data:[last.confirmed,last.recovered,last.deaths],
             }
         ]
     });
