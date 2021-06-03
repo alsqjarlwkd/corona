@@ -1,14 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/header'
-import Contents from './components/contents'
+import React,{useEffect} from "react";
+import Header from './components/header';
+import Contents from './components/contents';
+import GlobalContents from './components/GlobalContents';
+import UsaContents from './components/UsaContents';
+import UkContents from './components/UkContents';
+
 
 function App() {
   return (
-  <div>
+  <section>
   <Header></Header>
   <Contents></Contents>
-  </div>
+  <GlobalContents></GlobalContents>
+  <UsaContents></UsaContents>
+  <UkContents></UkContents>
+  </section>
   );
 }
 
