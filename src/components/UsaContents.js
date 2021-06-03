@@ -86,10 +86,9 @@ const UsaContents = () => {
         fetchUsaEvent();
     }, [])
     return (
-        <div>
-        <section>
-        <h2>미국 코로나 현황</h2>
-        <div className="contents">
+        <div className="usa_contents_wrapper">
+        <h2 style={{textAlign:"center"}}>미국 코로나 현황</h2>
+        <div className="Usa_contents">
         <div className="Global_Bar">
             <Bar data={UsaConfirmedData}></Bar>
         </div>
@@ -100,7 +99,6 @@ const UsaContents = () => {
             <Doughnut data={UsaComparedData}></Doughnut>
         </div>
         </div>
-        </section>    
         </div>
     )
 }

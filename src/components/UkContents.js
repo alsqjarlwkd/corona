@@ -75,8 +75,9 @@ const UkContents = () => {
     fetchUkEvent();
     },[])
     return (
+        <div className="uk_contents_wrapper">
+        <h2 style={{textAlign:"center"}}>영국 코로나 현황</h2>
             <div className="Uk_contents">
-            <h2>영국 코로나 현황</h2>
             <div>
             <Bar data={UkconfirmedData}></Bar>
             </div>
@@ -87,6 +88,7 @@ const UkContents = () => {
             <Doughnut data={UkComparedData}></Doughnut>
             </div>
             </div>
+        </div>
     )
 }
 

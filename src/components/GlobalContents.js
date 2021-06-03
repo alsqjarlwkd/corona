@@ -27,12 +27,14 @@ const AboradContents = () => {
     fetchGlobalEvents()
     }, [])
     return (
-    <section>
-        <h2>해외 전체인원 코로나 현황</h2>
+        <div className="global_contents_wrapper">
+        <h2 style={{textAlign:"center"}}>해외 전체인원 코로나 현황</h2>
+        <div className="global_contents">
         <div className="Global_Doughnut">
-            <Doughnut data={Globalconfiremd}></Doughnut>
+        <Doughnut data={Globalconfiremd}></Doughnut>
         </div>
-    </section>
+        </div>
+        </div>
     )
 }
 
