@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';//axios 선언
 import {Bar,Doughnut,Line} from 'react-chartjs-2';//차트 가져오기
+import UpArrow from './../imgs/up-arrow.png';
+import Loading from './loading';
 const Contents=()=>{
-
     const[confirmedData,setconfirmedData]=useState({});//data 상태 관리를 위한 useState Hook 사용
     const[quarantinedData,setquarantinedData]=useState({});
     const[comparedData,setcomparedData]=useState({});
+    const[lastComfirmedData,setLastComfirmedData] = useState();
+    const[lastRecoveredData,setRecoverComfirmedData] = useState();
+    const[lastDeathsData,setlastDeathsData] = useState();
+    const[comparecomfirmed,setcomparecomfirmed] = useState();
+    const[compareRecover,setcompareRecover] = useState();
+    const[compareDeath,setcompareDeath] = useState();
     useEffect(()=>{
         const fetchEvents=async()=>{
             const res = await axios.get("https://api.covid19api.com/total/dayone/country/kr")//해당 API에서 정보를 get 해온다
             makeData(res.data);//국내 확진자 수 데이터
+            setLastComfirmedData(res.data[res.data.length-1].Confirmed);
+            setRecoverComfirmedData(res.data[res.data.length-1].Recovered);
+            setlastDeathsData(res.data[res.data.length-1].Deaths);
+            setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-2].Confirmed);
+            setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-2].Recovered);
+            setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-2].Deaths);
         }
         const makeData =(items)=>{
         const arr = items.reduce((acc,cur)=>{
@@ -21,7 +34,6 @@ const Contents=()=>{
             const active = cur.Active;//cur의 배열에 Active 데이터 값을 active 변수에 기입
             const deaths = cur.Deaths;//cur의 배열에 Deaths 데이터 값을 deaths 변수에 기입
             const recovered = cur.Recovered; //cur의 배열에 Recovered recovered 변수에 기입
-
 
             const findItem = acc.find(a=>a.year === year && a.month === month);
             if(!findItem)
@@ -53,8 +65,8 @@ const Contents=()=>{
         labels:labels,
         datasets:[
             {
-                label:"국내 누적 확인자",
-                backgroundColor:"black",
+                label:"국내 누적 확인자(월단위)",
+                backgroundColor:"white",
                 fill:true,
                 data:arr.map(a=>a.confirmed),
             }
@@ -83,39 +95,47 @@ const Contents=()=>{
             }
         ]
     });
-    
     }
     fetchEvents();//fetchEvents 실행
     },[])
-
     return(
-        <section>
-        <h2>국내 코로나 현황</h2>
-        <div className="contents">
-            <div className="Corona_Bar">
-                <Bar data={confirmedData} options={
-                    {title:{display:true,Text:"누적확진자 추이",fontsize:16}},
-                    {legend:{display:true,position:"bottom"}}
-                }
-                ></Bar>
+        <div className="kr_contents_wrapper">
+        <h2 style={{textAlign:"center"}}>국내 코로나 현황</h2>
+        <div className="kr_Count_wrapper">
+            <div className="kr_Count_header">
+                <p>국내 누적 확진자</p>
             </div>
-            <div className="Corona_Line">
-                <Line data={quarantinedData} options={
-                    {title:{display:true,Text:"월별 확진자 추이",fontsize:16}},
-                    {legend:{display:true,position:"bottom"}}
-                }
-                ></Line>
+            <div className="kr_Count_Wrapper">
+            <div className="kr_Count">
+                <h3>확진자</h3>
+                {lastComfirmedData}
+                <p><img src={UpArrow}></img>{comparecomfirmed}</p>
             </div>
-            <div className="Corona_Doughnut">
-                <Doughnut data={comparedData} options={
-                    {title:{display:true,Text:`누적,확진,해제,사망(월)`,fontsize:16}},
-                    {legend:{display:true,position:"bottom"}}
-                }
-                ></Doughnut>
+            <div className="kr_recovered_Count">
+                <h3>격리해제</h3>
+                {lastRecoveredData}
+                <p><img src={UpArrow}></img>{compareRecover}</p>
+                </div>
+            <div className="kr_deaths_Count">
+                <h3>사망자</h3>
+                {lastDeathsData}
+                <p><img src={UpArrow}></img>{compareDeath}</p>
+                </div>
             </div>
         </div>
-    </section>
-    )
+        <div className="kr_contents">
+        <div className="Corona_Bar">
+                <Bar data={confirmedData}></Bar>
+            </div>
+            <div className="Corona_Line">
+                <Line data={quarantinedData}></Line>
+            </div>
+            <div className="Corona_Doughnut">
+                <Doughnut data={comparedData}></Doughnut>
+            </div>
+        </div>
+        </div>
+        )
 }
 
 export default Contents;
