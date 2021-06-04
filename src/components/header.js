@@ -46,7 +46,9 @@ const Header=()=>{
     }
     return(
 <header className="header">
+    <div className="header_h1">
     <h1>COVID-19</h1>
+    </div>
     <select name="select" id="GraphData" onChange={ChangeValue}>
         <option value="all">전체</option>
         <option value="kr">국내</option>
