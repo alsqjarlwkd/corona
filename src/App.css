@@ -8,8 +8,6 @@ html {
 }
 .header {
   padding: 1rem 2rem;
-  background-color: rgb(25, 31, 44);
-  border: 1px solid rgba(207, 207, 207, 0.25);
   box-shadow: rgb(0 0 0 / 2%) -1px 1px 6px;
   border-radius: 12px;
   display: flex;
@@ -18,6 +16,15 @@ html {
 }
 .header h1 {
   color: white;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.header_h1 {
+  border: 3px solid gray;
+  width: 200px;
+  height: 40px;
+  border-radius: 25px;
 }
 .header select {
   height: 30px;
@@ -59,6 +66,21 @@ html {
 .kr_Count_header {
   display: flex;
   justify-content: space-around;
+}
+.kr_Count_Wrapper {
+  max-width: 100%;
+  border: 3px solid gray;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  animation: fadein 2s ease-in-out;
+  border-radius: 25px;
+}
+.kr_Count_Wrapper img {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
 }
 @keyframes fadein {
   from {
