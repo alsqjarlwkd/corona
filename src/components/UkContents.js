@@ -1,17 +1,21 @@
 import React,{useEffect,useState} from 'react'
 import {Line,Bar,Doughnut} from 'react-chartjs-2';//차트 가져오기
+import Loading from './loading';
 const UkContents = () => {
     const [UkconfirmedData,setUkconfirmedData] = useState({});
     const [UkquarantinedData,setUkaquarantinedData] = useState({});
     const [UkComparedData,setUkComparedData] = useState({});
+    const [loadingData,setloadingData] = useState(true);
     useEffect(() => {
     const fetchUkEvent=()=>{
         fetch("https://api.covid19api.com/total/dayone/country/uk")
         .then(res=>res.json())//API를 불러왔을때 API를 json으로 변경하고
-        .then(Ukdata=>UkmakeData(Ukdata));//변환된 json형식의 데이터를 Ukdata를 인자값으로 줘서 콜백함수 호출
+        .then(Ukdata=>UkmakeData(Ukdata))//변환된 json형식의 데이터를 Ukdata를 인자값으로 줘서 콜백함수 호출
+        .catch(error => console.log('error', error));//서버에서 불러오지 못할시 에러 출력
     }
     const arr=[];
     const UkmakeData=(ukdata)=>{
+        setloadingData(false);
         ukdata.filter((element)=>{
             const currentDate = new Date(element.Date);
             const year = currentDate.getFullYear();//현재 년도
@@ -75,6 +79,8 @@ const UkContents = () => {
     fetchUkEvent();
     },[])
     return (
+        <>
+        {loadingData ? <Loading></Loading>:
         <div className="uk_contents_wrapper">
         <h2 style={{textAlign:"center"}}>영국 코로나 현황</h2>
             <div className="Uk_contents">
@@ -88,7 +94,8 @@ const UkContents = () => {
             <Doughnut data={UkComparedData}></Doughnut>
             </div>
             </div>
-        </div>
+        </div>}
+        </>
     )
 }
 
