@@ -57,7 +57,7 @@ const Header=()=>{
         <option value="uk">영국</option>
     </select>
 </header>
-    )
+)
 }
 
 export default Header;
