@@ -2,9 +2,14 @@ body,
 html {
   margin: 0;
   padding: 0;
-  height: 100%;
+  background: white;
+  color: black;
+  animation: fadeinDrakMode 1s ease-in-out;
+}
+.ui-dark {
   background: rgb(25, 31, 44);
-  color: rgb(183, 193, 204);
+  color: white;
+  animation: fadeinDrakMode 1s ease-in-out;
 }
 .header {
   padding: 1rem 2rem;
@@ -15,7 +20,6 @@ html {
   align-items: center;
 }
 .header h1 {
-  color: white;
   margin-top: 0px;
   margin-bottom: 0px;
   text-align: center;
@@ -92,13 +96,41 @@ html {
     transform: translateY(0px);
   }
 }
+@keyframes fadeinDrakMode {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @media (max-width: 768px) {
   .contents {
     display: flex;
     flex-direction: column;
   }
 }
-/*-----*/
+/*-----다크모드 변경---*/
+.DarkModeBtn {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 45px;
+}
+/*----KeepInstance.js*/
+.KeepInstance_Header {
+  text-align: center;
+}
+.KeepInstance_Layout {
+  width: 800px;
+  height: 1000px;
+  border-radius: 25px;
+  border: 3px solid gray;
+}
+.KeepInstance_Layout_flex {
+  display: flex;
+  justify-content: center;
+}
+/*-----spinner*/
 .loader {
   font-size: 10px;
   margin: 50px auto;
@@ -106,7 +138,7 @@ html {
   width: 11em;
   height: 11em;
   border-radius: 50%;
-  background: #ffffff;
+  background: blue;
   background: -moz-linear-gradient(
     left,
     #ffffff 10%,
@@ -138,7 +170,7 @@ html {
 .loader:before {
   width: 50%;
   height: 50%;
-  background: #ffffff;
+  background: blue;
   border-radius: 100% 0 0 0;
   position: absolute;
   top: 0;
@@ -146,7 +178,7 @@ html {
   content: "";
 }
 .loader:after {
-  background: #0dc5c1;
+  background: blue;
   width: 75%;
   height: 75%;
   border-radius: 50%;
