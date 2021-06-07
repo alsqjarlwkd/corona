@@ -1,10 +1,17 @@
 import React,{useEffect,useState} from 'react'
 import {Line,Bar,Doughnut} from 'react-chartjs-2';//차트 가져오기
 import Loading from './loading';
+import UpArrow from './../imgs/up-arrow.png';
 const UkContents = () => {
     const [UkconfirmedData,setUkconfirmedData] = useState({});
     const [UkquarantinedData,setUkaquarantinedData] = useState({});
     const [UkComparedData,setUkComparedData] = useState({});
+    const[lastComfirmedData,setLastComfirmedData] = useState();
+    const[lastRecoveredData,setRecoverComfirmedData] = useState();
+    const[lastDeathsData,setlastDeathsData] = useState();
+    const[comparecomfirmed,setcomparecomfirmed] = useState();
+    const[compareRecover,setcompareRecover] = useState();
+    const[compareDeath,setcompareDeath] = useState();
     const [loadingData,setloadingData] = useState(true);
     useEffect(() => {
     const fetchUkEvent=()=>{
@@ -16,6 +23,13 @@ const UkContents = () => {
     const arr=[];
     const UkmakeData=(ukdata)=>{
         setloadingData(false);
+        setLastComfirmedData(ukdata[ukdata.length-1].Confirmed);
+        setRecoverComfirmedData(ukdata.[ukdata.length-1].Recovered);
+        setlastDeathsData(ukdata.[ukdata.length-1].Deaths);
+        setcomparecomfirmed(ukdata.[ukdata.length-1].Confirmed-ukdata[ukdata.length-3].Confirmed);
+        setcompareRecover(ukdata.[ukdata.length-1].Recovered-ukdata[ukdata.length-3].Recovered);
+        setcompareDeath(ukdata[ukdata.length-1].Deaths-ukdata[ukdata.length-3].Deaths);
+        const arr=[];
         ukdata.filter((element)=>{
             const currentDate = new Date(element.Date);
             const year = currentDate.getFullYear();//현재 년도
@@ -82,6 +96,29 @@ const UkContents = () => {
         <>
         {loadingData ? <Loading></Loading>:
         <div className="uk_contents_wrapper">
+            <h2 style={{textAlign:"center"}}>영국 코로나 현황</h2>
+        <div className="kr_Count_wrapper">
+            <div className="kr_Count_header">
+                <p>영국 누적 확진자</p>
+            </div>
+            <div className="kr_Count_Wrapper">
+            <div className="kr_Count">
+                <h3>확진자</h3>
+                {lastComfirmedData}
+                <p><img src={UpArrow}></img>{comparecomfirmed}</p>
+            </div>
+            <div className="kr_recovered_Count">
+                <h3>격리해제</h3>
+                {lastRecoveredData}
+                <p><img src={UpArrow}></img>{compareRecover}</p>
+                </div>
+            <div className="kr_deaths_Count">
+                <h3>사망자</h3>
+                {lastDeathsData}
+                <p><img src={UpArrow}></img>{compareDeath}</p>
+                </div>
+            </div>
+        </div>
         <h2 style={{textAlign:"center"}}>영국 코로나 현황</h2>
             <div className="Uk_contents">
             <div>

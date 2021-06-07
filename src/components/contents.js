@@ -13,16 +13,18 @@ const Contents=()=>{
     const[comparecomfirmed,setcomparecomfirmed] = useState();
     const[compareRecover,setcompareRecover] = useState();
     const[compareDeath,setcompareDeath] = useState();
+    const[loadingData,setloadingData] = useState(true);
     useEffect(()=>{
         const fetchEvents=async()=>{
             const res = await axios.get("https://api.covid19api.com/total/dayone/country/kr")//해당 API에서 정보를 get 해온다
             makeData(res.data);//국내 확진자 수 데이터
+            setloadingData(false);
             setLastComfirmedData(res.data[res.data.length-1].Confirmed);
             setRecoverComfirmedData(res.data[res.data.length-1].Recovered);
             setlastDeathsData(res.data[res.data.length-1].Deaths);
-            setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-2].Confirmed);
-            setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-2].Recovered);
-            setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-2].Deaths);
+            setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-3].Confirmed);
+            setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-3].Recovered);
+            setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-3].Deaths);
         }
         const makeData =(items)=>{
         const arr = items.reduce((acc,cur)=>{
@@ -66,7 +68,7 @@ const Contents=()=>{
         datasets:[
             {
                 label:"국내 누적 확인자(월단위)",
-                backgroundColor:"white",
+                backgroundColor:"black",
                 fill:true,
                 data:arr.map(a=>a.confirmed),
             }
@@ -99,6 +101,8 @@ const Contents=()=>{
     fetchEvents();//fetchEvents 실행
     },[])
     return(
+        <>
+        {loadingData ? <Loading></Loading>:
         <div className="kr_contents_wrapper">
         <h2 style={{textAlign:"center"}}>국내 코로나 현황</h2>
         <div className="kr_Count_wrapper">
@@ -134,7 +138,8 @@ const Contents=()=>{
                 <Doughnut data={comparedData}></Doughnut>
             </div>
         </div>
-        </div>
+        </div>}
+        </>
         )
 }
 

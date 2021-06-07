@@ -8,19 +8,25 @@ const UsaContents = () => {
     const [UsaConfirmedData,setUsaConfirmedData] = useState({});
     const [UsaquarantinedData,setUsaquarantinedData] = useState({});
     const [UsaComparedData,setUsaComparedData] = useState({});
+    const[lastComfirmedData,setLastComfirmedData] = useState();
+    const[lastRecoveredData,setRecoverComfirmedData] = useState();
+    const[lastDeathsData,setlastDeathsData] = useState();
+    const[comparecomfirmed,setcomparecomfirmed] = useState();
+    const[compareRecover,setcompareRecover] = useState();
+    const[compareDeath,setcompareDeath] = useState();
     const [loadingData,setloadingData] = useState(true);
-    const [GlobalNewConfirmed,setGlobalNewConfirmed] = useState();
-    const [GlobalNewDeaths,setGlobalNewDeaths] = useState();
-    const [GlobalNewRecover,setGlobalNewRecover] =useState();
-    const [GlobalConfirmed,setGlobalConfirmed]=useState();
-    const [GlobalDeaths,setGlobalDeaths] = useState();
-    const [GlobalRecover,setGlobalRecover] = useState();
     useEffect(() => {
         const fetchUsaEvent = async() =>{
             const USA = await axios.get("https://api.covid19api.com/total/dayone/country/us")
             setloadingData(false);
             const UsaData = USA.data;
             makeUsaData(UsaData);
+            setLastComfirmedData(USA.data[USA.data.length-1].Confirmed);
+            setRecoverComfirmedData(USA.data[USA.data.length-1].Recovered);
+            setlastDeathsData(USA.data[USA.data.length-1].Deaths);
+            setcomparecomfirmed(USA.data[USA.data.length-1].Confirmed-USA.data[USA.data.length-3].Confirmed);
+            setcompareRecover(USA.data[USA.data.length-1].Recovered-USA.data[USA.data.length-3].Recovered);
+            setcompareDeath(USA.data[USA.data.length-1].Deaths-USA.data[USA.data.length-3].Deaths);
         }
         const makeUsaData=(usaData)=>{
             const arr = usaData.reduce((acc,cur)=>{
@@ -102,23 +108,23 @@ const UsaContents = () => {
              <h2 style={{textAlign:"center"}}>미국 코로나 현황</h2>
         <div className="kr_Count_wrapper">
             <div className="kr_Count_header">
-                <p>해외 전체 누적 확진자</p>
+                <p>미국 전체 누적 확진자</p>
             </div>
             <div className="kr_Count_Wrapper">
             <div className="kr_Count">
                 <h3>확진자</h3>
-                {GlobalConfirmed}
-                <p><img src={UpArrow}></img>{GlobalNewConfirmed}</p>
+                {lastComfirmedData}
+                <p><img src={UpArrow}></img>{comparecomfirmed}</p>
             </div>
             <div className="kr_recovered_Count">
                 <h3>격리해제</h3>
-                {GlobalDeaths}
-                <p><img src={UpArrow}></img>{GlobalNewRecover}</p>
+                {lastRecoveredData}
+                <p><img src={UpArrow}></img>{compareRecover}</p>
                 </div>
             <div className="kr_deaths_Count">
                 <h3>사망자</h3>
-                {GlobalRecover}
-                <p><img src={UpArrow}></img>{GlobalNewDeaths}</p>
+                {lastDeathsData}
+                <p><img src={UpArrow}></img>{compareDeath}</p>
                 </div>
             </div>
         </div>
