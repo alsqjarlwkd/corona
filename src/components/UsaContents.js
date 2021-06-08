@@ -24,9 +24,9 @@ const UsaContents = () => {
             setLastComfirmedData(USA.data[USA.data.length-1].Confirmed);
             setRecoverComfirmedData(USA.data[USA.data.length-1].Recovered);
             setlastDeathsData(USA.data[USA.data.length-1].Deaths);
-            setcomparecomfirmed(USA.data[USA.data.length-1].Confirmed-USA.data[USA.data.length-3].Confirmed);
-            setcompareRecover(USA.data[USA.data.length-1].Recovered-USA.data[USA.data.length-3].Recovered);
-            setcompareDeath(USA.data[USA.data.length-1].Deaths-USA.data[USA.data.length-3].Deaths);
+            setcomparecomfirmed(USA.data[USA.data.length-1].Confirmed-USA.data[USA.data.length-2].Confirmed);
+            setcompareRecover(USA.data[USA.data.length-1].Recovered-USA.data[USA.data.length-2].Recovered);
+            setcompareDeath(USA.data[USA.data.length-1].Deaths-USA.data[USA.data.length-2].Deaths);
         }
         const makeUsaData=(usaData)=>{
             const arr = usaData.reduce((acc,cur)=>{

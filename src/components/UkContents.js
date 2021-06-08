@@ -26,9 +26,9 @@ const UkContents = () => {
         setLastComfirmedData(ukdata[ukdata.length-1].Confirmed);
         setRecoverComfirmedData(ukdata.[ukdata.length-1].Recovered);
         setlastDeathsData(ukdata.[ukdata.length-1].Deaths);
-        setcomparecomfirmed(ukdata.[ukdata.length-1].Confirmed-ukdata[ukdata.length-3].Confirmed);
-        setcompareRecover(ukdata.[ukdata.length-1].Recovered-ukdata[ukdata.length-3].Recovered);
-        setcompareDeath(ukdata[ukdata.length-1].Deaths-ukdata[ukdata.length-3].Deaths);
+        setcomparecomfirmed(ukdata.[ukdata.length-1].Confirmed-ukdata[ukdata.length-2].Confirmed);
+        setcompareRecover(ukdata.[ukdata.length-1].Recovered-ukdata[ukdata.length-2].Recovered);
+        setcompareDeath(ukdata[ukdata.length-1].Deaths-ukdata[ukdata.length-2].Deaths);
         const arr=[];
         ukdata.filter((element)=>{
             const currentDate = new Date(element.Date);

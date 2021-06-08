@@ -22,9 +22,9 @@ const Contents=()=>{
             setLastComfirmedData(res.data[res.data.length-1].Confirmed);
             setRecoverComfirmedData(res.data[res.data.length-1].Recovered);
             setlastDeathsData(res.data[res.data.length-1].Deaths);
-            setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-3].Confirmed);
-            setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-3].Recovered);
-            setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-3].Deaths);
+            setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-2].Confirmed);
+            setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-2].Recovered);
+            setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-2].Deaths);
         }
         const makeData =(items)=>{
         const arr = items.reduce((acc,cur)=>{
