@@ -105,15 +105,32 @@ html {
   }
 }
 @media (max-width: 768px) {
-  .contents {
+  .kr_contents {
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+  .Usa_contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .Uk_contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 /*-----다크모드 변경---*/
-.DarkModeBtn {
+.DarkModeBtn_flex {
   display: flex;
   justify-content: flex-end;
+}
+.DarkModeBtn {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100px;
   padding-right: 45px;
 }
 /*----KeepInstance.js*/
@@ -130,6 +147,94 @@ html {
   display: flex;
   justify-content: center;
 }
+.KeepInstance_Layout {
+  display: flex;
+  justify-content: center;
+}
+.KeepInstance_Layout li {
+  list-style: none;
+}
+.label {
+  font-size: 35px;
+  font-weight: bold;
+}
+.KeepInstance {
+  font-size: 35px;
+}
+.InstanceLevel_Wrapper {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  border: 3px solid gray;
+  border-radius: 25px;
+}
+.InstanceLevel_Wrapper div {
+  cursor: pointer;
+}
+.InstanceLevel_Wrapper div:hover {
+  background: black;
+}
+.InstanceLevel15_text {
+  text-align: center;
+}
+.InstanceLevel20_text {
+  text-align: center;
+  display: none;
+}
+/*--------Modal.js*/
+.openModal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: black;
+  overflow-y: scroll;
+  animation: modal-show 1s ease-in-out;
+}
+.modal > section > header {
+  font-size: 3vw;
+  color: white;
+  text-align: center;
+}
+.close_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.close {
+  color: white;
+  border-radius: 75%;
+  font-size: 3vw;
+  transform: scale(1);
+  transition: 1s;
+}
+.close:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+@keyframes modal-bg-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /*-----spinner*/
 .loader {
   font-size: 10px;
