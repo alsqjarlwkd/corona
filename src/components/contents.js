@@ -25,6 +25,7 @@ const Contents=()=>{
             setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-2].Confirmed);
             setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-2].Recovered);
             setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-2].Deaths);
+            console.log(res);
         }
         const makeData =(items)=>{
         const arr = items.reduce((acc,cur)=>{
@@ -113,17 +114,17 @@ const Contents=()=>{
             <div className="kr_Count">
                 <h3>확진자</h3>
                 {lastComfirmedData}
-                <p><img src={UpArrow}></img>{comparecomfirmed}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{comparecomfirmed}</p>
             </div>
             <div className="kr_recovered_Count">
                 <h3>격리해제</h3>
                 {lastRecoveredData}
-                <p><img src={UpArrow}></img>{compareRecover}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{compareRecover}</p>
                 </div>
             <div className="kr_deaths_Count">
                 <h3>사망자</h3>
                 {lastDeathsData}
-                <p><img src={UpArrow}></img>{compareDeath}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{compareDeath}</p>
                 </div>
             </div>
         </div>

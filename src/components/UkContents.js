@@ -20,7 +20,6 @@ const UkContents = () => {
         .then(Ukdata=>UkmakeData(Ukdata))//변환된 json형식의 데이터를 Ukdata를 인자값으로 줘서 콜백함수 호출
         .catch(error => console.log('error', error));//서버에서 불러오지 못할시 에러 출력
     }
-    const arr=[];
     const UkmakeData=(ukdata)=>{
         setloadingData(false);
         setLastComfirmedData(ukdata[ukdata.length-1].Confirmed);
@@ -53,6 +52,7 @@ const UkContents = () => {
                     recovered
                 })
             }
+            return element;
         })
         const labels = arr.map((a)=>`${a.month+1}월`);
         setUkconfirmedData({
@@ -105,17 +105,17 @@ const UkContents = () => {
             <div className="kr_Count">
                 <h3>확진자</h3>
                 {lastComfirmedData}
-                <p><img src={UpArrow}></img>{comparecomfirmed}</p>
+                <p><img src={UpArrow} alt="uparrow"></img>{comparecomfirmed}</p>
             </div>
             <div className="kr_recovered_Count">
                 <h3>격리해제</h3>
                 {lastRecoveredData}
-                <p><img src={UpArrow}></img>{compareRecover}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{compareRecover}</p>
                 </div>
             <div className="kr_deaths_Count">
                 <h3>사망자</h3>
                 {lastDeathsData}
-                <p><img src={UpArrow}></img>{compareDeath}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{compareDeath}</p>
                 </div>
             </div>
         </div>

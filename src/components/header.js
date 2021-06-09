@@ -8,35 +8,35 @@ const Header=()=>{
         const globalData = document.querySelector(".global_contents_wrapper");
         const usaData = document.querySelector(".usa_contents_wrapper");
         const ukData = document.querySelector(".uk_contents_wrapper");
-        if(Value == "kr")
+        if(Value === "kr")
         {
             krData.style.display ="block";
             globalData.style.display ="none";
             usaData.style.display ="none";
             ukData.style.display ="none";
         }
-        else if(Value == "global")
+        else if(Value === "global")
         {
             krData.style.display ="none";
             globalData.style.display ="block";
             usaData.style.display ="none";
             ukData.style.display ="none";
         }
-        else if(Value == "usa")
+        else if(Value === "usa")
         {
             krData.style.display ="none";
             globalData.style.display ="none";
             usaData.style.display ="block";
             ukData.style.display ="none";
         }
-        else if(Value == "uk")
+        else if(Value === "uk")
         {
             krData.style.display ="none";
             globalData.style.display ="none";
             usaData.style.display ="none";
             ukData.style.display ="block";
         }
-        else if(Value == "all")
+        else if(Value === "all")
         {
             krData.style.display ="block";
             globalData.style.display ="block";

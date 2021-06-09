@@ -4,16 +4,15 @@ import {Line,Bar, Doughnut} from 'react-chartjs-2';//차트 가져오기
 import Loading from './loading';
 import UpArrow from './../imgs/up-arrow.png';
 const UsaContents = () => {
-
     const [UsaConfirmedData,setUsaConfirmedData] = useState({});
     const [UsaquarantinedData,setUsaquarantinedData] = useState({});
     const [UsaComparedData,setUsaComparedData] = useState({});
     const[lastComfirmedData,setLastComfirmedData] = useState();
     const[lastRecoveredData,setRecoverComfirmedData] = useState();
     const[lastDeathsData,setlastDeathsData] = useState();
-    const[comparecomfirmed,setcomparecomfirmed] = useState();
-    const[compareRecover,setcompareRecover] = useState();
-    const[compareDeath,setcompareDeath] = useState();
+    const[comparecomfirmed,setcomparecomfirmed] = useState([]);
+    const[compareRecover,setcompareRecover] = useState([]);
+    const[compareDeath,setcompareDeath] = useState([]);
     const [loadingData,setloadingData] = useState(true);
     useEffect(() => {
         const fetchUsaEvent = async() =>{
@@ -27,6 +26,7 @@ const UsaContents = () => {
             setcomparecomfirmed(USA.data[USA.data.length-1].Confirmed-USA.data[USA.data.length-2].Confirmed);
             setcompareRecover(USA.data[USA.data.length-1].Recovered-USA.data[USA.data.length-2].Recovered);
             setcompareDeath(USA.data[USA.data.length-1].Deaths-USA.data[USA.data.length-2].Deaths);
+            console.log(USA);
         }
         const makeUsaData=(usaData)=>{
             const arr = usaData.reduce((acc,cur)=>{
@@ -100,12 +100,12 @@ const UsaContents = () => {
     });
         }
         fetchUsaEvent();
-    }, [])
+    }, [comparecomfirmed,compareRecover,compareDeath])
     return (
         <>
         {loadingData ? <Loading></Loading>:
         <div className="usa_contents_wrapper">
-             <h2 style={{textAlign:"center"}}>미국 코로나 현황</h2>
+             <h2 style={{textAlign:"center"}}>미국 코로나 현황(격리해제 데이터 없음)</h2>
         <div className="kr_Count_wrapper">
             <div className="kr_Count_header">
                 <p>미국 전체 누적 확진자</p>
@@ -114,17 +114,17 @@ const UsaContents = () => {
             <div className="kr_Count">
                 <h3>확진자</h3>
                 {lastComfirmedData}
-                <p><img src={UpArrow}></img>{comparecomfirmed}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{comparecomfirmed}</p>
             </div>
             <div className="kr_recovered_Count">
                 <h3>격리해제</h3>
                 {lastRecoveredData}
-                <p><img src={UpArrow}></img>{compareRecover}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{compareRecover}</p>
                 </div>
             <div className="kr_deaths_Count">
                 <h3>사망자</h3>
                 {lastDeathsData}
-                <p><img src={UpArrow}></img>{compareDeath}</p>
+                <p><img src={UpArrow}alt="uparrow"></img>{compareDeath}</p>
                 </div>
             </div>
         </div>
