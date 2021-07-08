@@ -26,8 +26,8 @@ const UsaContents = () => {
             setcomparecomfirmed(USA.data[USA.data.length-1].Confirmed-USA.data[USA.data.length-2].Confirmed);
             setcompareRecover(USA.data[USA.data.length-1].Recovered-USA.data[USA.data.length-2].Recovered);
             setcompareDeath(USA.data[USA.data.length-1].Deaths-USA.data[USA.data.length-2].Deaths);
-            console.log(USA);
         }
+        
         const makeUsaData=(usaData)=>{
             const arr = usaData.reduce((acc,cur)=>{
             const currentDate = new Date(cur.Date);//cur.Date 에서 Date 메소드를 이용하여 데이터에 들어있는 날짜 값을 불러옴
@@ -100,7 +100,7 @@ const UsaContents = () => {
     });
         }
         fetchUsaEvent();
-    }, [comparecomfirmed,compareRecover,compareDeath])
+    }, [])
     return (
         <>
         {loadingData ? <Loading></Loading>:

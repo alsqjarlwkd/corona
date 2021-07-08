@@ -14,6 +14,7 @@ const Contents=()=>{
     const[compareRecover,setcompareRecover] = useState();
     const[compareDeath,setcompareDeath] = useState();
     const[loadingData,setloadingData] = useState(true);
+    
     useEffect(()=>{
         const fetchEvents=async()=>{
             const res = await axios.get("https://api.covid19api.com/total/dayone/country/kr")//해당 API에서 정보를 get 해온다
@@ -22,10 +23,9 @@ const Contents=()=>{
             setLastComfirmedData(res.data[res.data.length-1].Confirmed);
             setRecoverComfirmedData(res.data[res.data.length-1].Recovered);
             setlastDeathsData(res.data[res.data.length-1].Deaths);
-            setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-2].Confirmed);
-            setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-2].Recovered);
-            setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-2].Deaths);
-            console.log(res);
+            setcomparecomfirmed(res.data[res.data.length-1].Confirmed-res.data[res.data.length-3].Confirmed);
+            setcompareRecover(res.data[res.data.length-1].Recovered-res.data[res.data.length-3].Recovered);
+            setcompareDeath(res.data[res.data.length-1].Deaths-res.data[res.data.length-3].Deaths);
         }
         const makeData =(items)=>{
         const arr = items.reduce((acc,cur)=>{
